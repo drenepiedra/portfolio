@@ -68,16 +68,22 @@ a{
     width: 100px;
 }
 
-a i {
-    margin-left: 5px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    font-size: 14px;
-}
 
-a:hover i {
-    opacity: 1;
+
+/* Estilo del boton  */
+/* .bottom {
+    margin-top: 10px;
+    background-color:rgb(106, 109, 109);
+    border-radius: 5px;
+    padding: 5px;
+    align-items: center;
+    margin-right: 250px;
+
 }
+.bottom :hover{
+    width: 25px;
+    transition:0.2s ;
+} */
 
 /* animations / utilities */
 .section-2 a:hover{
@@ -96,6 +102,17 @@ a:hover i {
 .white:hover{
     transform: scale(1.2);
     transition: 0.5s;
+}
+
+.section-3 a i {
+    margin-left: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 14px;
+}
+
+.section-3 a:hover i {
+    opacity: 1;
 }
 
 /* media queres */
