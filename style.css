@@ -1,5 +1,6 @@
 /* global */
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Roboto ');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css ');
 
 .grid-2{
     display: grid;
@@ -66,6 +67,17 @@ a{
     font-size: 1.2rem;
     /* padding-left: 0; */
     width: 100px;
+}
+
+a i {
+    margin-left: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 14px;
+}
+
+a:hover i {
+    opacity: 1;
 }
 
 /* animations / utilities */
