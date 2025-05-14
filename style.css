@@ -68,6 +68,7 @@ a{
     width: 100px;
 }
 
+/* section 3 */
 .section-3 a i {
     margin-left: 5px;
     opacity: 0;
@@ -78,6 +79,7 @@ a{
 .section-3 a:hover i {
     opacity: 1;
 }
+
 
 
 /* animations / utilities */
