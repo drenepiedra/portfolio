@@ -123,6 +123,32 @@ button {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+
+/* Estilo para el contenedor del botón */
+.theme-toggle {
+    position: fixed;
+    /* o absolute si prefieres que se mueva con el scroll */
+    top: 0px;
+    right: 20px;
+    z-index: 1000;
+}
+
+/* Mejora visual opcional del botón */
+.theme-toggle button {
+    background-color: #121212a4;
+    color: white;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle button:hover {
+    background-color: #ffffff;
+    color: black;
+}
 /* -------------------------------------- */
 
 /* animations / utilities */
