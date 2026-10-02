@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Daniel René Piedra — Desarrollador web / Mobile</title>
+    <title>Daniel René Piedra — Desarrollador web junior</title>
     <meta name="description"
         content="Portfolio de Daniel René Piedra, desarrollador web junior en La Habana, Cuba. HTML, CSS, JavaScript, Vue, Laravel y TailwindCSS.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -286,9 +286,15 @@
             border: 1px solid var(--solid);
             border-radius: 14px;
             padding: 20px 22px;
-            font: 400 13px/1.8 var(--mono);
-            overflow-x: auto;
-            white-space: pre
+            font: 400 13px/1.8 var(--mono)
+        }
+
+        .code .ln {
+            display: block
+        }
+
+        .code .in {
+            padding-left: 2ch
         }
 
         .code i {
@@ -304,6 +310,19 @@
         .code u {
             text-decoration: none;
             color: var(--muted)
+        }
+
+        .bar {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 14px
+        }
+
+        .bar span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--line)
         }
 
         .bar {
@@ -668,14 +687,15 @@
                     </div>
                 </div>
                 <div class="code" aria-hidden="true">
-                    <div class="bar"><span></span><span></span><span></span></div><u>// perfil.js</u>
-                    <i>const</i> dann = {
-                    rol: <b>"Desarrollador web junior"</b>,
-                    lugar: <b>"La Habana, Cuba"</b>,
-                    stack: [<b>"Vue"</b>, <b>"Laravel"</b>, <b>"TailwindCSS"</b>],
-                    experiencia: <b>"3+ años"</b>,
-                    mejorQueAyer: <i>true</i>,
-                    };
+                    <div class="bar"><span></span><span></span><span></span></div>
+                    <span class="ln"><u>// perfil.js</u></span>
+                    <span class="ln"><i>const</i> dann = {</span>
+                    <span class="ln in">rol: <b>"Desarrollador web junior"</b>,</span>
+                    <span class="ln in">lugar: <b>"La Habana, Cuba"</b>,</span>
+                    <span class="ln in">stack: [<b>"Vue"</b>, <b>"Laravel"</b>, <b>"TailwindCSS"</b>],</span>
+                    <span class="ln in">experiencia: <b>"3+ años"</b>,</span>
+                    <span class="ln in">mejorQueAyer: <i>true</i>,</span>
+                    <span class="ln">};</span>
                 </div>
             </div>
         </section>
