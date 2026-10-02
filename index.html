@@ -1,77 +1,888 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="public/images/logo.svg" type="image">
-    <title>Portfolio Dann</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Daniel René Piedra — Desarrollador web / Mobile</title>
+    <meta name="description"
+        content="Portfolio de Daniel René Piedra, desarrollador web junior en La Habana, Cuba. HTML, CSS, JavaScript, Vue, Laravel y TailwindCSS.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fff;
+            --fg: #0f172a;
+            --muted: #64748b;
+            --line: #cbd5e1;
+            --solid: #e2e8f0;
+            --card: #f8fafc;
+            --hatch: rgba(15, 23, 42, .06);
+            --accent: #0284c7;
+            --sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+            --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        @media (prefers-color-scheme:dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #0b1120;
+                --fg: #e2e8f0;
+                --muted: #94a3b8;
+                --line: #334155;
+                --solid: #1e293b;
+                --card: #0f172a;
+                --hatch: rgba(255, 255, 255, .06);
+                --accent: #38bdf8
+            }
+        }
+
+        :root[data-theme="dark"] {
+            --bg: #0b1120;
+            --fg: #e2e8f0;
+            --muted: #94a3b8;
+            --line: #334155;
+            --solid: #1e293b;
+            --card: #0f172a;
+            --hatch: rgba(255, 255, 255, .06);
+            --accent: #38bdf8
+        }
+
+        html {
+            scroll-padding-top: calc(72px + env(safe-area-inset-top, 0px));
+            scroll-behavior: smooth
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font: 400 16px/1.65 var(--sans);
+            -webkit-font-smoothing: antialiased
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        h1,
+        h2,
+        h3,
+        p,
+        ul,
+        dl,
+        dd {
+            margin: 0
+        }
+
+        ul {
+            padding: 0;
+            list-style: none
+        }
+
+        .mono {
+            font-family: var(--mono)
+        }
+
+        .band {
+            border-top: 1px dashed var(--line);
+            background: repeating-linear-gradient(-45deg, var(--hatch) 0 1px, transparent 1px 7px)
+        }
+
+        .frame {
+            position: relative;
+            max-width: 1080px;
+            margin: 0 auto;
+            background: var(--bg);
+            border-inline: 1px dashed var(--line);
+            padding: clamp(40px, 7vw, 84px) clamp(20px, 5vw, 56px)
+        }
+
+        .frame::before,
+        .frame::after {
+            content: "+";
+            position: absolute;
+            top: 0;
+            font: 400 14px/1 var(--mono);
+            color: var(--muted);
+            background: var(--bg);
+            padding: 1px 0
+        }
+
+        .frame::before {
+            left: 0;
+            transform: translate(-50%, -50%)
+        }
+
+        .frame::after {
+            right: 0;
+            transform: translate(50%, -50%)
+        }
+
+        /* header */
+        header {
+            position: sticky;
+            top: env(safe-area-inset-top, 0px);
+            z-index: 10;
+            background: color-mix(in srgb, var(--bg) 85%, transparent);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px dashed var(--line)
+        }
+
+        .nav {
+            max-width: 1080px;
+            margin: 0 auto;
+            height: 64px;
+            padding: 0 clamp(20px, 5vw, 56px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            border-inline: 1px dashed var(--line)
+        }
+
+        .logo {
+            font: 600 15px var(--mono)
+        }
+
+        .logo span {
+            color: var(--accent)
+        }
+
+        .links {
+            display: flex;
+            gap: 22px;
+            font-size: 14px;
+            color: var(--muted)
+        }
+
+        .links a:hover {
+            color: var(--fg)
+        }
+
+        .tools {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        #themeButton {
+            width: 38px;
+            height: 38px;
+            border-radius: 999px;
+            border: 1px dashed var(--line);
+            background: var(--card);
+            color: var(--fg);
+            font-size: 16px;
+            cursor: pointer
+        }
+
+        #themeButton:hover {
+            border-style: solid
+        }
+
+        /* hero */
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 13px;
+            border: 1px dashed var(--line);
+            border-radius: 999px;
+            font: 500 12px var(--mono);
+            color: var(--muted);
+            background: var(--card)
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, .2)
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            gap: 48px;
+            align-items: center
+        }
+
+        .eyebrow {
+            font: 500 12px var(--mono);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin: 26px 0 14px
+        }
+
+        h1 {
+            font-size: clamp(34px, 5.4vw, 58px);
+            line-height: 1.08;
+            letter-spacing: -.035em;
+            font-weight: 800
+        }
+
+        h1 em {
+            font-style: normal;
+            color: var(--accent)
+        }
+
+        .lead {
+            margin-top: 22px;
+            color: var(--muted);
+            max-width: 56ch
+        }
+
+        .cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 20px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 14px;
+            border: 1px solid var(--fg);
+            transition: transform .15s
+        }
+
+        .btn:hover {
+            transform: translateY(-2px)
+        }
+
+        .btn.p {
+            background: var(--fg);
+            color: var(--bg)
+        }
+
+        .btn.s {
+            border: 1px dashed var(--line);
+            background: var(--card)
+        }
+
+        .code {
+            background: var(--card);
+            border: 1px solid var(--solid);
+            border-radius: 14px;
+            padding: 20px 22px;
+            font: 400 13px/1.8 var(--mono);
+            overflow-x: auto;
+            white-space: pre
+        }
+
+        .code i {
+            font-style: normal;
+            color: var(--accent)
+        }
+
+        .code b {
+            font-weight: 400;
+            color: #16a34a
+        }
+
+        .code u {
+            text-decoration: none;
+            color: var(--muted)
+        }
+
+        .bar {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 14px
+        }
+
+        .bar span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--line)
+        }
+
+        /* stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            padding: 0
+        }
+
+        .stats div {
+            padding: 26px clamp(16px, 3vw, 32px);
+            border-left: 1px dashed var(--line)
+        }
+
+        .stats div:first-child {
+            border-left: 0
+        }
+
+        .stats strong {
+            display: block;
+            font-size: clamp(22px, 3.2vw, 32px);
+            letter-spacing: -.03em;
+            line-height: 1.2
+        }
+
+        .stats span {
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        /* sections */
+        .sec {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: clamp(24px, 5vw, 64px)
+        }
+
+        .label {
+            font: 500 12px var(--mono);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--muted)
+        }
+
+        .label b {
+            color: var(--accent);
+            font-weight: 500;
+            margin-right: 8px
+        }
+
+        h2 {
+            font-size: clamp(24px, 3.4vw, 34px);
+            letter-spacing: -.03em;
+            line-height: 1.2;
+            margin-bottom: 18px
+        }
+
+        .txt {
+            color: var(--muted);
+            max-width: 68ch
+        }
+
+        .card {
+            border: 1px dashed var(--line);
+            border-radius: 16px;
+            padding: clamp(20px, 3vw, 30px);
+            background: var(--card)
+        }
+
+        .job {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 6px 16px;
+            margin-bottom: 18px
+        }
+
+        .job h3 {
+            font-size: 18px
+        }
+
+        .job p {
+            font-size: 14px;
+            color: var(--muted)
+        }
+
+        .when {
+            font: 500 12px var(--mono);
+            padding: 4px 11px;
+            border: 1px dashed var(--line);
+            border-radius: 999px;
+            height: fit-content;
+            color: var(--muted)
+        }
+
+        .ticks li {
+            position: relative;
+            padding-left: 22px;
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 15px
+        }
+
+        .ticks li::before {
+            content: "›";
+            position: absolute;
+            left: 4px;
+            color: var(--accent);
+            font-weight: 700
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
+        }
+
+        .proj {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border: 1px dashed var(--line);
+            border-radius: 16px;
+            padding: 22px;
+            background: var(--card);
+            transition: border-color .15s, transform .15s
+        }
+
+        .proj:hover {
+            border-style: solid;
+            border-color: var(--accent);
+            transform: translateY(-3px)
+        }
+
+        .proj small {
+            font: 500 12px var(--mono);
+            color: var(--accent);
+            overflow-wrap: anywhere
+        }
+
+        .proj h3 {
+            font-size: 17px
+        }
+
+        .proj p {
+            font-size: 14px;
+            color: var(--muted);
+            flex: 1
+        }
+
+        .proj .go {
+            font-size: 13px;
+            font-weight: 600
+        }
+
+        .more {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            font-size: 14px;
+            color: var(--muted)
+        }
+
+        .chip {
+            display: inline-block;
+            padding: 3px 11px;
+            border: 1px dashed var(--line);
+            border-radius: 8px;
+            font: 500 12.5px var(--mono);
+            background: var(--card);
+            color: var(--fg)
+        }
+
+        a.chip:hover {
+            border-style: solid;
+            border-color: var(--accent)
+        }
+
+        .skills {
+            display: grid;
+            border: 1px dashed var(--line);
+            border-radius: 16px;
+            overflow: hidden
+        }
+
+        .skills div {
+            display: grid;
+            grid-template-columns: 190px 1fr;
+            gap: 12px;
+            padding: 16px 22px;
+            border-top: 1px dashed var(--line);
+            align-items: start
+        }
+
+        .skills div:first-child {
+            border-top: 0
+        }
+
+        .skills dt {
+            font-weight: 600;
+            font-size: 14px
+        }
+
+        .skills dd {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px
+        }
+
+        .two {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 28px
+        }
+
+        .two li {
+            padding: 14px 16px;
+            border: 1px dashed var(--line);
+            border-radius: 12px;
+            font-size: 14px;
+            color: var(--muted)
+        }
+
+        .contact {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px
+        }
+
+        .contact a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 22px;
+            border: 1px dashed var(--line);
+            border-radius: 14px;
+            background: var(--card);
+            font-weight: 600;
+            transition: transform .15s
+        }
+
+        .contact a:hover {
+            border-style: solid;
+            border-color: var(--accent);
+            transform: translateY(-2px)
+        }
+
+        .contact span {
+            font: 400 12.5px var(--mono);
+            color: var(--muted);
+            font-weight: 400;
+            overflow-wrap: anywhere;
+            text-align: right
+        }
+
+        footer .frame {
+            padding-block: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
+            font: 400 12.5px var(--mono);
+            color: var(--muted)
+        }
+
+        @media (max-width:860px) {
+            .links {
+                display: none
+            }
+
+            .hero,
+            .sec {
+                grid-template-columns: 1fr
+            }
+
+            .sec {
+                gap: 14px
+            }
+
+            .projects,
+            .contact,
+            .two {
+                grid-template-columns: 1fr
+            }
+
+            .skills div {
+                grid-template-columns: 1fr;
+                gap: 8px
+            }
+        }
+
+        @media (max-width:520px) {
+            .stats {
+                grid-template-columns: 1fr
+            }
+
+            .stats div {
+                border-left: 0;
+                border-top: 1px dashed var(--line)
+            }
+
+            .stats div:first-child {
+                border-top: 0
+            }
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+            html {
+                scroll-behavior: auto
+            }
+
+            * {
+                transition: none !important
+            }
+        }
+    </style>
 </head>
-<body class="dark-mode">
-    <div class="grid-2">
 
-        <div class="section-1">
-            <i class="fas fa-code fa-5x white"></i>
-            <h2>Hi my  name is Dann👋🏻</h2>
-            <p>I'm a junior Developer<br> from Cuba , La Habana</p>
-            <a href="https://x.com/dannstone056?t=1-TVXJE7jk5ajg0fvgSZEA&s=08"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.linkedin.com/in/daniel-rene-piedra-sifontes-71b88527b"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/drenepiedra"><i class="fab fa-github"></i></a>
+<body>
+    <header>
+        <div class="nav">
+            <a class="logo" href="#inicio">dann<span>.dev</span></a>
+            <nav class="links">
+                <a href="#sobre-mi">Sobre mí</a><a href="#experiencia">Experiencia</a><a
+                    href="#proyectos">Proyectos</a><a href="#skills">Skills</a><a href="#contacto">Contacto</a>
+            </nav>
+            <div class="tools"><button id="themeButton" aria-label="Cambiar tema" title="Cambiar tema">🌙</button></div>
         </div>
+    </header>
 
-
-        <div class="section-2">
-            <h2>About</h2>
-            <p>I'm an ordinary person, a programming enthusiast. I like to learn new things as I move forward with my life projects and
-            face every challenge that comes my way.
-            My goal is to always be better than yesterday.</p>
-            <h2>Experience</h2>
-            <p>I have +1 year of experience working in the Tech industry</p>
-
-            <h2>Skills</h2>
-            <p>I master the technologies needed to create amazing projects:</p>
-            <ul>
-                <li>
-                    HTML
-                </li>
-                <li>
-                    CSS
-                </li>
-                <li>
-                    JavaScript
-                </li>
-                <li>
-                    PHP
-                </li>
-                <li>
-                    Laravel 
-                </li>
-                <li>
-                    Java
-                </li>
-            </ul>
-            <div class="section-3">
-                <h2>Projects</h2>
-                <ul>
-                    <li><a href="#"> Computerization<i class="fas fa-link enlace"></i></a><br></li>
-                    <li><a href="#"> Task-Tracker<i class="fas fa-link"></i></a><br></li>
-                    <li><a href="#"> Github-Activity<i class="fas fa-link"></i></a><br></li>
-                    <li><a href="#"> Phone Repertory<i class="fas fa-link"></i></a></li>   
-                </ul>
+    <main>
+        <!-- HERO -->
+        <section class="band" id="inicio">
+            <div class="frame hero">
+                <div>
+                    <span class="pill"><span class="dot"></span>Abierto a oportunidades · La Habana, Cuba</span>
+                    <p class="eyebrow">Daniel René Piedra — Desarrollador web junior</p>
+                    <h1>Interfaces web <em>funcionales</em>, responsivas y mantenibles.</h1>
+                    <p class="lead">Más de 3 años construyendo proyectos personales, freelance y colaborativos: desde la
+                        interfaz hasta la integración con APIs REST. Me interesa convertir necesidades reales en
+                        soluciones digitales orientadas al usuario.</p>
+                    <div class="cta">
+                        <a class="btn p" href="#contacto">Hablemos →</a>
+                        <a class="btn s" href="https://github.com/drenepiedra" target="_blank" rel="noopener">GitHub
+                            ↗</a>
+                    </div>
+                </div>
+                <div class="code" aria-hidden="true">
+                    <div class="bar"><span></span><span></span><span></span></div><u>// perfil.js</u>
+                    <i>const</i> dann = {
+                    rol: <b>"Desarrollador web junior"</b>,
+                    lugar: <b>"La Habana, Cuba"</b>,
+                    stack: [<b>"Vue"</b>, <b>"Laravel"</b>, <b>"TailwindCSS"</b>],
+                    experiencia: <b>"3+ años"</b>,
+                    mejorQueAyer: <i>true</i>,
+                    };
+                </div>
             </div>
-        <h2>Contact</h2>
-            <a href="wa.me/+5355358734">WhatsApp</a><i class="fas fa-phone"></i>
-            <br>
-            <a href="mailto:drenepiedra@gmail.com">Email <i class="fas fa-envelope"></i></a>
+        </section>
 
-            <div class="theme-toggle">
-                <button id="themeButton">Modo: 🌙</button>
+        <!-- STATS -->
+        <section class="band">
+            <div class="frame stats" style="padding-block:0">
+                <div><strong>3+ años</strong><span>de experiencia práctica</span></div>
+                <div><strong>3 proyectos</strong><span>publicados en línea</span></div>
+                <div><strong>Vue · Laravel</strong><span>+ TailwindCSS</span></div>
             </div>
+        </section>
 
-        <!-- Agregar boton descargar CV .  -->
-    </div>
-    <script src="./script.js"></script>
+        <!-- SOBRE MI -->
+        <section class="band" id="sobre-mi">
+            <div class="frame sec">
+                <div class="label"><b>01</b>Sobre mí</div>
+                <div>
+                    <h2>Aprendizaje continuo, resolución de problemas.</h2>
+                    <p class="txt">Desarrollador web junior especializado en construir interfaces funcionales y
+                        responsivas, integrar APIs REST, desarrollar paneles administrativos y crear componentes
+                        reutilizables. Trabajo con HTML5, CSS3, JavaScript, TailwindCSS, Vue y Laravel, apoyándome en
+                        Git y GitHub para el control de versiones.</p>
+                    <p class="txt" style="margin-top:14px">Mi meta es simple: ser mejor que ayer.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCIA -->
+        <section class="band" id="experiencia">
+            <div class="frame sec">
+                <div class="label"><b>02</b>Experiencia</div>
+                <div>
+                    <h2>Experiencia profesional</h2>
+                    <div class="card">
+                        <div class="job">
+                            <div>
+                                <h3>Desarrollador Web</h3>
+                                <p>Freelance · Proyectos personales y colaborativos</p>
+                            </div>
+                            <span class="when">2023 – 2026</span>
+                        </div>
+                        <ul class="ticks">
+                            <li>Interfaces web modernas y responsivas con HTML5, CSS3, JavaScript y TailwindCSS.</li>
+                            <li>Funcionalidades dinámicas con JavaScript y manipulación del DOM.</li>
+                            <li>Integración y consumo de APIs REST, con manejo de respuestas asíncronas entre frontend y
+                                backend.</li>
+                            <li>Paneles administrativos y componentes reutilizables para mejorar la organización y el
+                                mantenimiento.</li>
+                            <li>Git y GitHub para control de versiones, seguimiento de cambios y colaboración.</li>
+                            <li>Optimización de interfaces y tiempos de carga mejorando estructura, recursos y
+                                componentes.</li>
+                            <li>Depuración de errores para mantener las aplicaciones funcionales y estables.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROYECTOS -->
+        <section class="band" id="proyectos">
+            <div class="frame sec">
+                <div class="label"><b>03</b>Proyectos</div>
+                <div>
+                    <h2>Proyectos destacados</h2>
+                    <p class="txt" style="margin-bottom:24px">Soluciones web completas, de la interfaz a la integración
+                        con servicios y APIs.</p>
+                    <div class="projects">
+                        <a class="proj" href="https://mystartup.aewhitedevs.com/" target="_blank" rel="noopener">
+                            <small>mystartup.aewhitedevs.com</small>
+                            <h3>myProject</h3>
+                            <p>Startup de ingeniería y software: desarrollo de hardware y software a medida, con soporte
+                                directo.</p><span class="go">Ver proyecto ↗</span>
+                        </a>
+                        <a class="proj" href="https://component.aewhitedevs.com" target="_blank" rel="noopener">
+                            <small>component.aewhitedevs.com</small>
+                            <h3>Components</h3>
+                            <p>Componentes y utilidades reutilizables para acelerar el desarrollo con un código
+                                consistente.</p><span class="go">Ver proyecto ↗</span>
+                        </a>
+                        <a class="proj" href="https://drenepiedra.github.io/AcademyLearn/#01-intro.md" target="_blank"
+                            rel="noopener">
+                            <small>drenepiedra.github.io/AcademyLearn</small>
+                            <h3>AcademyLearn</h3>
+                            <p>Proyecto de aprendizaje con contenido organizado en lecciones, publicado con GitHub
+                                Pages.</p><span class="go">Ver proyecto ↗</span>
+                        </a>
+                    </div>
+                    <div class="more"><span>Más en GitHub:</span>
+                        <a class="chip" href="https://github.com/drenepiedra" target="_blank"
+                            rel="noopener">Task-Tracker</a>
+                        <a class="chip" href="https://github.com/drenepiedra" target="_blank"
+                            rel="noopener">Github-Activity</a>
+                        <a class="chip" href="https://github.com/drenepiedra" target="_blank" rel="noopener">Phone
+                            Repertory</a>
+                        <a class="chip" href="https://github.com/drenepiedra" target="_blank"
+                            rel="noopener">Computerization</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section class="band" id="skills">
+            <div class="frame sec">
+                <div class="label"><b>04</b>Skills</div>
+                <div>
+                    <h2>Competencias técnicas</h2>
+                    <dl class="skills">
+                        <div>
+                            <dt>Lenguajes</dt>
+                            <dd><span class="chip">HTML5</span><span class="chip">CSS3</span><span
+                                    class="chip">JavaScript</span><span class="chip">PHP</span><span
+                                    class="chip">Java</span></dd>
+                        </div>
+                        <div>
+                            <dt>Frameworks / Librerías</dt>
+                            <dd><span class="chip">Vue</span><span class="chip">Laravel</span><span
+                                    class="chip">TailwindCSS</span></dd>
+                        </div>
+                        <div>
+                            <dt>Herramientas</dt>
+                            <dd><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Visual
+                                    Studio Code</span></dd>
+                        </div>
+                        <div>
+                            <dt>Desarrollo web</dt>
+                            <dd><span class="chip">Responsive Design</span><span class="chip">APIs REST</span><span
+                                    class="chip">DOM</span><span class="chip">Componentes reutilizables</span></dd>
+                        </div>
+                        <div>
+                            <dt>Buenas prácticas</dt>
+                            <dd><span class="chip">Depuración</span><span class="chip">Optimización básica</span><span
+                                    class="chip">Organización y mantenimiento de código</span></dd>
+                        </div>
+                    </dl>
+                    <h2 style="margin:44px 0 18px">Competencias profesionales</h2>
+                    <ul class="two">
+                        <li>Aprendizaje rápido y adaptación a nuevas tecnologías y entornos.</li>
+                        <li>Pensamiento analítico para investigar y resolver problemas técnicos.</li>
+                        <li>Perseverancia, responsabilidad y mejora continua.</li>
+                        <li>Comunicación clara y disposición a trabajar en equipo.</li>
+                        <li>Proactividad para convertir requerimientos en soluciones funcionales.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- OBJETIVO -->
+        <section class="band">
+            <div class="frame sec">
+                <div class="label"><b>05</b>Objetivo</div>
+                <div>
+                    <h2>Lo que busco</h2>
+                    <p class="txt">Integrarme a un equipo de desarrollo donde pueda aportar mis conocimientos en
+                        desarrollo web, fortalecer mis competencias y aprender de profesionales con experiencia. Quiero
+                        participar en proyectos reales, asumir nuevos desafíos y evolucionar hacia un perfil capaz de
+                        construir soluciones digitales sólidas, mantenibles y útiles.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACTO -->
+        <section class="band" id="contacto">
+            <div class="frame sec">
+                <div class="label"><b>06</b>Contacto</div>
+                <div>
+                    <h2>Trabajemos juntos</h2>
+                    <div class="contact">
+                        <a href="mailto:drenepiedra@gmail.com">Email <span>drenepiedra@gmail.com</span></a>
+                        <a href="https://wa.me/5355358734" target="_blank" rel="noopener">WhatsApp <span>+53
+                                55358734</span></a>
+                        <a href="https://github.com/drenepiedra" target="_blank" rel="noopener">GitHub <span>drenepiedra
+                                ↗</span></a>
+                        <a href="https://www.linkedin.com/in/daniel-rene-piedra-sifontes-71b88527b" target="_blank"
+                            rel="noopener">LinkedIn <span>Daniel René Piedra ↗</span></a>
+                        <a href="https://x.com/dannstone056" target="_blank" rel="noopener">X / Twitter
+                            <span>@dannstone056 ↗</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="band">
+        <div class="frame"><span>© 2026 Daniel René Piedra</span><span>La Habana, Cuba · Hecho con HTML y CSS</span>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var root = document.documentElement, btn = document.getElementById("themeButton");
+            function isDark() {
+                var t = root.getAttribute("data-theme");
+                return t ? t === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+            }
+            function paint() { btn.textContent = isDark() ? "☀️" : "🌙"; }
+            try { var saved = localStorage.getItem("theme"); if (saved) root.setAttribute("data-theme", saved); } catch (e) { }
+            paint();
+            btn.addEventListener("click", function () {
+                var next = isDark() ? "light" : "dark";
+                root.setAttribute("data-theme", next);
+                try { localStorage.setItem("theme", next); } catch (e) { }
+                paint();
+            });
+        })();
+    </script>
 </body>
+
 </html>
